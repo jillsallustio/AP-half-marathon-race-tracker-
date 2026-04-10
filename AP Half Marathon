@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🏃‍♂️ Track My Race Live</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="font-family: Arial; text-align: center;">
+  <h1>🏁 Follow My Half Marathon!</h1>
+  <p>Live location below:</p>
+
+  <iframe 
+    src="PASTE_YOUR_GOOGLE_MAPS_LINK_HERE"
+    width="100%" 
+    height="600" 
+    style="border:0;">
+  </iframe>
+
+  <p>Refresh if needed 🔄</p>
+</body>
+</html>
