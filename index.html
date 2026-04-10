@@ -1,32 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Track My Asbury Park Half Marathon</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track My Asbury Park Half Marathon</title>
 </head>
 <body style="font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #f5f5f5; margin: 0;">
+  <h1 style="font-size: 48px; margin-bottom: 16px;">🏁 Asbury Park Half Marathon</h1>
 
-  <h1>🏁 Asbury Park Half Marathon</h1>
-  <p>Follow my race live and see the course map below.</p>
+  <p style="font-size: 18px; margin-bottom: 20px;">
+    Follow my race live and see the course map below.
+  </p>
 
-  <a href="https://maps.app.goo.gl/wmEuJ4ruZdZ7o6JE8" target="_blank"
-     style="display: inline-block; margin: 20px 0; font-size: 22px; padding: 15px 25px; background: #28a745; color: white; text-decoration: none; border-radius: 8px;">
-    📍 Track Me Live
-  </a>
+  <p style="font-size: 16px; max-width: 800px; margin: 0 auto 30px; line-height: 1.6;">
+    👉 Open the live tracker to see my exact location, then compare it to the course map below.
+  </p>
 
-  <h2>🗺️ Course Map</h2>
-  <img src="course-map.jpg" alt="Race Course Map"
-       style="width: 100%; max-width: 600px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+  <p>
+    <a
+      href="https://maps.app.goo.gl/wmEuJ4ruZdZ7o6JE8"
+      target="_blank"
+      rel="noopener noreferrer"
+      style="display: inline-block; margin: 20px 0 40px; font-size: 22px; padding: 16px 28px; background: #28a745; color: white; text-decoration: none; border-radius: 8px;"
+    >
+      📍 Track Me Live
+    </a>
+  </p>
 
-  <p style="margin-top: 20px; line-height: 1.5;">
+  <div style="background: white; max-width: 700px; margin: 0 auto 40px; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+    <h2 style="margin-top: 0;">⏱️ Race Timing</h2>
+
+    <p style="font-size: 18px; margin: 10px 0;">
+      <strong>Start Time:</strong> 8:30 AM
+    </p>
+
+    <p style="font-size: 18px; margin: 10px 0;">
+      <strong>Estimated Finish:</strong> 11:00 AM – 11:15 AM
+    </p>
+
+    <p style="font-size: 18px; margin: 10px 0;">
+      <strong>Total Distance:</strong> 13.1 miles
+    </p>
+
+    <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
+
+    <p style="font-size: 18px; margin: 10px 0;">
+      <strong>Current Time:</strong> <span id="current-time">--:--:--</span>
+    </p>
+
+    <p style="font-size: 18px; margin: 10px 0;">
+      <strong>Race Clock:</strong> <span id="race-clock">00:00:00</span>
+    </p>
+
+    <p style="font-size: 18px; margin: 10px 0;">
+      <strong>Status:</strong> <span id="race-status">Loading...</span>
+    </p>
+
+    <div style="margin-top: 25px;">
+      <p style="font-size: 18px; margin-bottom: 10px;">
+        <strong>Estimated Progress</strong>
+      </p>
+
+      <div style="width: 100%; background: #e0e0e0; border-radius: 999px; height: 24px; overflow: hidden;">
+        <div id="progress-bar-fill" style="width: 0%; height: 100%; background: #28a745; transition: width 1s ease;"></div>
+      </div>
+
+      <p style="font-size: 18px; margin: 14px 0 6px;">
+        <strong>Estimated Miles Completed:</strong> <span id="miles-completed">0.0</span>
+      </p>
+
+      <p style="font-size: 18px; margin: 6px 0;">
+        <strong>Estimated Miles Remaining:</strong> <span id="miles-remaining">13.1</span>
+      </p>
+
+      <p style="font-size: 15px; color: #666; margin-top: 14px; line-height: 1.5;">
+        These are time-based estimates using a projected 2:30 finish pace. Your actual position is shown in the live tracker.
+      </p>
+    </div>
+  </div>
+
+  <h2 style="font-size: 24px; margin-bottom: 20px;">🗺️ Course Map</h2>
+
+  <img
+    src="course-map.jpg"
+    alt="Race Course Map"
+    style="width: 100%; max-width: 900px; height: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);"
+  >
+
+  <p style="margin-top: 20px; line-height: 1.6; font-size: 16px;">
     Start: Asbury Park Boardwalk<br>
     Finish: Boardwalk near 4th Ave
   </p>
+
+  <div style="background: white; max-width: 700px; margin: 40px auto 20px; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+    <h2 style="margin-top: 0;">🏅 Finish Update</h2>
+    <p style="font-size: 18px; margin: 10px 0;"><strong>Finish Time:</strong> Coming soon</p>
+    <p style="font-size: 18px; margin: 10px 0;"><strong>Miles Completed:</strong> 13.1</p>
+    <p style="font-size: 18px; margin: 10px 0;"><strong>Miles Remaining:</strong> 0</p>
+  </div>
 
   <p style="margin-top: 30px; font-size: 14px; color: gray;">
     Live location updates via Google Maps
   </p>
 
+  <script>
+    function pad(num) {
+      return String(num).padStart(2, '0');
+    }
+
+    function formatTime(date) {
+      return date.toLocaleTimeString([], {
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+    }
+
+    function formatDuration(ms) {
+      const totalSeconds = Math.floor(ms / 1000);
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function updateRaceClock() {
+      const now = new Date();
+
+      // Saturday, April 11, 2026 at 8:30 AM
+      const raceStart = new Date(2026, 3, 11, 8, 30, 0);
+
+      // Expected finish window: 2:30 to 2:45 after start
+      const estFinishEarly = new Date(2026, 3, 11, 11, 0, 0);
+      const estFinishLate = new Date(2026, 3, 11, 11, 15, 0);
+
+      // Progress estimate uses 2:30 finish time
+      const projectedFinish = estFinishEarly;
+
+      const totalMiles = 13.1;
+      const totalProjectedMs = projectedFinish - raceStart;
+      const elapsedMs = now - raceStart;
+
+      document.getElementById('current-time').textContent = formatTime(now);
+
+      const raceClockEl = document.getElementById('race-clock');
+      const statusEl = document.getElementById('race-status');
+      const progressBarFill = document.getElementById('progress-bar-fill');
+      const milesCompletedEl = document.getElementById('miles-completed');
+      const milesRemainingEl = document.getElementById('miles-remaining');
+
+      let progress = 0;
+
+      if (now < raceStart) {
+        raceClockEl.textContent = "00:00:00";
+        statusEl.textContent = "Race has not started yet";
+        progress = 0;
+      } else if (now >= raceStart && now < estFinishEarly) {
+        raceClockEl.textContent = formatDuration(elapsedMs);
+        statusEl.textContent = "Race in progress";
+        progress = clamp(elapsedMs / totalProjectedMs, 0, 1);
+      } else if (now >= estFinishEarly && now <= estFinishLate) {
+        raceClockEl.textContent = formatDuration(elapsedMs);
+        statusEl.textContent = "Projected finish window";
+        progress = 1;
+      } else {
+        raceClockEl.textContent = formatDuration(elapsedMs);
+        statusEl.textContent = "Projected finish window has passed";
+        progress = 1;
+      }
+
+      const estimatedMilesCompleted = (progress * totalMiles);
+      const estimatedMilesRemaining = totalMiles - estimatedMilesCompleted;
+
+      progressBarFill.style.width = `${(progress * 100).toFixed(1)}%`;
+      milesCompletedEl.textContent = estimatedMilesCompleted.toFixed(1);
+      milesRemainingEl.textContent = Math.max(0, estimatedMilesRemaining).toFixed(1);
+    }
+
+    updateRaceClock();
+    setInterval(updateRaceClock, 1000);
+  </script>
 </body>
 </html>
